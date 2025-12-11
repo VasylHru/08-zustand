@@ -1,0 +1,21 @@
+.loader {
+  display: inline-block;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: #4c7eff;
+  animation: wave 1.4s infinite ease-in-out;
+  width: 100%;
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
