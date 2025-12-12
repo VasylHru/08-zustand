@@ -7,6 +7,11 @@ import { fetchNotes } from "@/lib/api";
 import NotesFilterClient from "./NotesFilter.client";
 import { notFound } from "next/navigation";
 
+
+
+
+
+
 export default async function NotesFilterPage({
   params,
 }: {
@@ -16,9 +21,7 @@ export default async function NotesFilterPage({
 
   const { tag } = await params;
 
-  
-
- const VALID_TAGS = ["all", "Todo", "Work", "Personal", "Meeting", "Shopping"];
+  const VALID_TAGS = ["all", "Todo", "Work", "Personal", "Meeting", "Shopping"];
   const tagParam = tag?.[0];
   const normalizedTag = tagParam === "all" ? undefined : tagParam;
 

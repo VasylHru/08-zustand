@@ -3,16 +3,33 @@ import {
   HydrationBoundary,
   dehydrate,
 } from "@tanstack/react-query";
+import type { Metadata } from "next";
 import { fetchNoteById } from "@/lib/api";
 import NoteDetailsClient from "./NoteDetails.client";
 
-
-type PageProps = {
+type PageProp = {
   params: Promise<{ id: string }>;
 };
 
-export default async function NoteDetailsPage({ params }: PageProps) {
-  const { id } = await params;      
+export const generateMetadata = async  ({params}:PageProp): Promise<Metadata> =>  {
+   const { id } = await params;
+    const note = await fetchNoteById(id)
+  return {
+    title: note.title, 
+    description: `Discription for Notes #${note.id}` ,
+    openGraph:{
+      title:note.title,
+      description:`Description for Note #${note.id}`,
+      images: [
+        
+
+      ]
+    }
+  };
+}
+
+export default async function NoteDetailsPage({ params }: PageProp) {
+  const { id } = await params;
 
   const queryClient = new QueryClient();
 
@@ -23,7 +40,7 @@ export default async function NoteDetailsPage({ params }: PageProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NoteDetailsClient id={id} /> 
+      <NoteDetailsClient id={id} />
     </HydrationBoundary>
   );
 }
