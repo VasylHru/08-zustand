@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import { fetchNoteById } from "@/lib/api";
 import NoteDetailsClient from "./NoteDetails.client";
 
+
 type PageProp = {
   params: Promise<{ id: string }>;
 };
@@ -20,10 +21,15 @@ export const generateMetadata = async  ({params}:PageProp): Promise<Metadata> =>
     openGraph:{
       title:note.title,
       description:`Description for Note #${note.id}`,
-      images: [
-        
-
-      ]
+      //  url: `https://notehub.com/notes/${id}`,
+         images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: note.title,
+        },
+      ],
     }
   };
 }

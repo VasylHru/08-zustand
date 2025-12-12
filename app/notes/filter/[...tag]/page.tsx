@@ -3,13 +3,10 @@ import {
   QueryClient,
   dehydrate,
 } from "@tanstack/react-query";
+import type { Metadata } from "next";
 import { fetchNotes } from "@/lib/api";
 import NotesFilterClient from "./NotesFilter.client";
 import { notFound } from "next/navigation";
-
-
-
-
 
 
 export default async function NotesFilterPage({
