@@ -9,14 +9,14 @@ import NotesFilterClient from "./NotesFilter.client";
 import { notFound } from "next/navigation";
 
 type PageProp = {
-  params: { tag?: string[] };
+  params: { slug?: string[] };
 };
 
 export const generateMetadata = async ({
   params,
 }: PageProp): Promise<Metadata> => {
-  const { tag } = await params;
-  const tagParam = tag?.[0];
+  const { slug} = await params;
+  const tagParam = slug?.[0];
   const normalizedTag = tagParam === "all" ? `All notes` : tagParam;
 
   return {
@@ -41,15 +41,15 @@ export const generateMetadata = async ({
 export default async function NotesFilterPage({
   params,
 }: {
-  params: Promise<{ tag: string[] }>;
+  params: Promise<{ slug: string[] }>;
 }) {
   
   const queryClient = new QueryClient();
 
-  const { tag } = await params;
+  const { slug } = await params;
 
   const VALID_TAGS = ["all", "Todo", "Work", "Personal", "Meeting", "Shopping"];
-  const tagParam = tag?.[0];
+  const tagParam = slug?.[0];
   const normalizedTag = tagParam === "all" ? undefined : tagParam;
 
   if (!VALID_TAGS.includes(tagParam)) {

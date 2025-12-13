@@ -4,6 +4,17 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Notes | NoteHub",
+  description: "Browse and manage your notes",
+};
+
+
+
+
 import { fetchNotes } from "@/lib/api";
 import NotesClient from "./Notes.client";
 export default async function NotesPage() {
