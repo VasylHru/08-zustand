@@ -43,6 +43,7 @@ export default async function NotesFilterPage({
 }: {
   params: Promise<{ tag: string[] }>;
 }) {
+  
   const queryClient = new QueryClient();
 
   const { tag } = await params;
