@@ -1,4 +1,5 @@
 import css from "./Home.module.css";
+import Image from "next/image";
 
 export default function HomePage() {
   return (
@@ -18,6 +19,8 @@ export default function HomePage() {
           NoteHub offers a streamlined experience for anyone who values clarity
           and productivity.
         </p>
+
+        <Image src="/notes.png" alt="test" width={1200} height={630} />
       </div>
     </main>
   );
