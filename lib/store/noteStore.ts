@@ -2,6 +2,15 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { NoteTag } from "@/types/note";
 
+
+// export const useNoteDraft = create<{}>(set)=>({
+//   draft:{
+//     title:"",
+//   },
+//   saveDraft:(data)=>({draft: data},)
+//   clearDraft:() =>set({draft:{title: ""}}) 
+// })
+
 export const initialDraft = {
   title: "",
   content: "",
@@ -34,6 +43,7 @@ export const useNoteStore = create<NoteStore>()(
     }),
     {
       name: "note-draft", 
+      partialize: (state) => ({ draft: state.draft }),
     }
   )
 );
