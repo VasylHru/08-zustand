@@ -3,10 +3,10 @@ import css from "@/components/NoteFound/note-found.module.css";
 
 export const metadata: Metadata = {
   title: "NoteHub — Page Not Found",
-  description: "Pahe not found",
+  description: "Page not found",
   openGraph: {
     title: "NoteHub — Page Not Found",
-    description: "Pahe not found",
+    description: "Page not found",
     url: "https://notehub.vercel.app",
     images: ["https://ac.goit.global/fullstack/react/notehub-og-meta.jpg"],
   },

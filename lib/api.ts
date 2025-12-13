@@ -34,7 +34,7 @@ export async function fetchNotes(
 ): Promise<FetchNotesResponse> {
   const params: Record<string, string | number> = {
     page,
-    perPage: 12,
+    perPage: 20,
   };
 
   if (search) {

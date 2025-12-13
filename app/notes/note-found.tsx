@@ -1,13 +1,9 @@
+"use-client"
 
-import type { Metadata } from "next";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import css from "@/components/NoteFound/note-found.module.css";
 
-export const metadata: Metadata = {
-  title: "NoteHub — Page Not Found",
-  description: "Pahe not found",
-};
 
 const NotFound = () => {
   const router = useRouter();

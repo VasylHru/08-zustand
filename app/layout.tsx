@@ -13,7 +13,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "NoteHub",
+  title: "NoteHub Home Page",
   description: "App for creating notes",
   openGraph: {
     title: "NoteHub",

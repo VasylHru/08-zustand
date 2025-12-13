@@ -8,6 +8,35 @@ import { fetchNotes } from "@/lib/api";
 import NotesFilterClient from "./NotesFilter.client";
 import { notFound } from "next/navigation";
 
+type PageProp = {
+  params: { tag?: string[] };
+};
+
+export const generateMetadata = async ({
+  params,
+}: PageProp): Promise<Metadata> => {
+  const { tag } = await params;
+  const tagParam = tag?.[0];
+  const normalizedTag = tagParam === "all" ? `All notes` : tagParam;
+
+  return {
+    title: `${normalizedTag}`,
+    description: `Notes page filtered by tag ${normalizedTag}`,
+    openGraph: {
+      title: `${normalizedTag}`,
+      description: `Notes page filtered by tag ${normalizedTag}`,
+      url: `https://notehub.vercel.app`,
+      images: [
+        {
+          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+          width: 1200,
+          height: 630,
+          alt: `NoteHub Page`,
+        },
+      ],
+    },
+  };
+};
 
 export default async function NotesFilterPage({
   params,
