@@ -1,15 +1,26 @@
-
-"use client"
+"use client";
 import { useRouter } from "next/navigation";
 import css from "./NoteForm.module.css";
 import { createNote } from "@/lib/api";
 import type { NoteTag } from "@/types/note";
 import { useNoteStore } from "@/lib/store/noteStore";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const NoteForm = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const { draft, setDraft, clearDraft } = useNoteStore();
+
+  const mutation = useMutation({
+    mutationFn: createNote,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
+      clearDraft();
+      router.back();
+    },
+  });
+
   const handleChange = (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -21,17 +32,14 @@ const NoteForm = () => {
     });
   };
 
-  const handleSubmit = async (formData: FormData) => {
+  const handleSubmit = (formData: FormData) => {
     const values = Object.fromEntries(formData) as {
       title: string;
       content: string;
       tag: NoteTag;
     };
 
-    await createNote(values);
-
-    clearDraft();
-    router.back();
+    mutation.mutate(values);
   };
 
   const handleCancel = () => router.back();
@@ -83,7 +91,11 @@ const NoteForm = () => {
       </div>
 
       <div className={css.actions}>
-        <button type="submit" className={css.submitButton}>
+        <button
+          type="submit"
+          className={css.submitButton}
+          disabled={mutation.isPending}
+        >
           Create note
         </button>
 

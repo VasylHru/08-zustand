@@ -13,17 +13,22 @@ import Loader from "@/components/Loader/Loader";
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 import css from "@/components/NotesPage/NotesPage.module.css";
 
-export default function NotesClient() {
+
+type NotesClientProps = {
+  tag: string;
+};
+
+export default function NotesClient({ tag }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
 
   const [debouncedSearch] = useDebounce(search,500);
 
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["notes", page, debouncedSearch],
-    queryFn: () => fetchNotes(page, debouncedSearch),
+ const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["notes",tag, page, debouncedSearch],
+    queryFn: () => fetchNotes(page,tag,debouncedSearch),
     placeholderData: (prev) => prev,
-  });
+  }); 
 
   const handleSearchChange = (value: string) => {
     setSearch(value);
