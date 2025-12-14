@@ -15,7 +15,7 @@ import css from "@/components/NotesPage/NotesPage.module.css";
 
 
 type NotesClientProps = {
-  tag: string;
+   tag?: string;
 };
 
 export default function NotesClient({ tag }: NotesClientProps) {
