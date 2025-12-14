@@ -9,7 +9,7 @@ import NotesFilterClient from "./NotesFilter.client";
 import { notFound } from "next/navigation";
 
 type PageProp = {
-  params: { slug?: string[] };
+params: Promise<{ slug: string[] }>
 };
 
 export const generateMetadata = async ({
@@ -25,7 +25,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: `${normalizedTag}`,
       description: `Notes page filtered by tag ${normalizedTag}`,
-      url: `https://08-zustand-blush-seven.vercel.app/notes/filter/all`,
+      url: `https://08-zustand-blush-seven.vercel.app/notes/filter/${tagParam}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
