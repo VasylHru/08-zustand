@@ -8,35 +8,34 @@ import { fetchNotes } from "@/lib/api";
 import NotesClient from "./Notes.client";
 import { notFound } from "next/navigation";
 
-type PageProp = {
+type Props = {
   params: Promise<{ slug: string[] }>;
 };
-
-export const generateMetadata = async ({
-  params,
-}: PageProp): Promise<Metadata> => {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const tagParam = slug?.[0];
-  const normalizedTag = tagParam === "all" ? `All notes` : tagParam;
+  const url = slug.join('/');
+  const tagName = slug[slug.length - 1];
 
   return {
-    title: `${normalizedTag}`,
-    description: `Notes page filtered by tag ${normalizedTag}`,
+    title: ` ${tagName}`,
+    description: `Page with selected filters: ${url}`,
     openGraph: {
-      title: `${normalizedTag}`,
-      description: `Notes page filtered by tag ${normalizedTag}`,
-      url: `https://08-zustand-blush-seven.vercel.app/notes/filter/${tagParam}`,
+      title: `Notes: ${tagName}`,
+      description: `Page with selected filters: ${url}`,
+      url: `https://notehub.com/notes/filter/${url}`,
+      siteName: 'NoteHub',
       images: [
         {
-          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+          url: 'https://ac.goit.global/fullstack/react/og-meta.jpg',
           width: 1200,
           height: 630,
-          alt: `NoteHub Page`,
+          alt: `Notes: ${tagName}`,
         },
       ],
+      type: 'article',
     },
   };
-};
+}
 
 export default async function NotesFilterPage({
   params,

@@ -103,6 +103,7 @@ const NoteForm = () => {
           type="button"
           className={css.cancelButton}
           onClick={handleCancel}
+          disabled={mutation.isPending}
         >
           Cancel
         </button>
